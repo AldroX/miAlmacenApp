@@ -38,11 +38,13 @@ class _DashboardPageState extends State<DashboardPage> {
       double invested = 0;
       double profit = 0;
       final byProduct = <String, int>{};
+      final idMap = <String, String>{};
 
       for (var p in productsList) {
         invested += p.price * p.quantity;
         profit += (p.salePrice - p.price) * p.quantity;
         byProduct[p.name] = (byProduct[p.name] ?? 0) + p.quantity;
+        idMap[p.name] = p.id;
       }
 
       setState(() {
@@ -52,6 +54,7 @@ class _DashboardPageState extends State<DashboardPage> {
         soldByProduct = Map<String, int>.from(byProduct);
         products = productsList;
         isLoading = false;
+        nameToId = Map.from(idMap);
       });
     } catch (e) {
       setState(() {
