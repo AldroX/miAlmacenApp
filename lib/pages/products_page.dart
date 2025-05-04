@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../services/product_service.dart';
 import '../models/product.dart';
-import 'create_product_page.dart';
-import 'edit_product_page.dart';
+import 'product_form_page.dart';
 import 'update_stock_page.dart';
 
 class ProductsPage extends StatefulWidget {
@@ -58,7 +57,7 @@ class _ProductsPageState extends State<ProductsPage> {
                       await Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => EditProductPage(product: p)));
+                              builder: (_) => ProductFormPage(product: p)));
                       _load();
                     }),
                 IconButton(
@@ -81,7 +80,7 @@ class _ProductsPageState extends State<ProductsPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const CreateProductPage()));
+              MaterialPageRoute(builder: (_) => const ProductFormPage()));
           _load();
         },
         child: const Icon(Icons.add),
