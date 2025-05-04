@@ -24,6 +24,15 @@ class ProductService {
   static Future<List<Product>> getProducts() async =>
       (await _openBox()).values.toList();
 
+  static Future<Product> getProductById(String id) async {
+    final box = await _openBox();
+    final product = box.get(id);
+    if (product == null) {
+      throw Exception('Producto no encontrado con ID: $id');
+    }
+    return product;
+  }
+
   static Future<void> updateProduct(Product product) async {
     final box = await _openBox();
     await box.put(product.id, product);
