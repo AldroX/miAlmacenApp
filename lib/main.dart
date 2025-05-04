@@ -19,12 +19,10 @@ void main() async {
     try {
       await Hive.openBox<Product>(ProductService.boxName);
     } catch (e) {
-      print('Error al abrir la caja: $e');
       await Hive.deleteBoxFromDisk(ProductService.boxName);
       await Hive.openBox<Product>(ProductService.boxName);
     }
   } catch (e) {
-    print('Error en la inicialización de Hive: $e');
     // Aquí podrías mostrar un diálogo de error al usuario
   }
 
