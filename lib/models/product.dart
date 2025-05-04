@@ -23,4 +23,14 @@ class Product extends HiveObject {
     required this.quantity,
     this.imagePath,
   });
+  @override
+  String toString() {
+    return 'Product('
+        'id: $id, '
+        'name: $name, '
+        'price: $price, '
+        'salePrice: $salePrice, '
+        'quantity: $quantity'
+        ')';
+  }
 }
