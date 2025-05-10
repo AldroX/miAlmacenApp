@@ -13,17 +13,28 @@ class PieChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Lista de tonos de azul
+    final List<Color> colorList = [
+      Colors.blue[900]!,
+      Colors.blue[700]!,
+      Colors.blue[500]!,
+      Colors.blue[300]!,
+      Colors.blue[200]!,
+      Colors.blue[100]!,
+    ];
     return Center(
       child: PieChart(
         dataMap: dataMap,
-        chartType: ChartType.disc,
+        chartType: ChartType.ring,
+        ringStrokeWidth: 40,
         chartRadius: chartRadius,
+        colorList: colorList,
         legendOptions: const LegendOptions(
-          legendPosition: LegendPosition.bottom,
+          legendPosition: LegendPosition.left,
           showLegends: true,
         ),
         chartValuesOptions: const ChartValuesOptions(
-          showChartValuesInPercentage: true,
+          showChartValuesInPercentage: false,
           showChartValues: true,
         ),
       ),
