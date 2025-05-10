@@ -6,6 +6,11 @@ import 'package:image_picker/image_picker.dart';
 import '../services/product_service.dart';
 import '../models/product.dart';
 
+const authOutlineInputBorder = OutlineInputBorder(
+  borderSide: BorderSide(color: Color(0xFF757575)),
+  borderRadius: BorderRadius.all(Radius.circular(100)),
+);
+
 class ProductFormPage extends StatefulWidget {
   final Product? product; // si es nulo -> crear; si no -> editar
 
@@ -105,89 +110,166 @@ class _ProductFormPageState extends State<ProductFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(isEditing ? 'Editar Producto' : 'Crear Producto'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          isEditing ? 'Editar Producto' : 'Crear Producto',
+          style: const TextStyle(color: Color(0xFF364c84)),
+        ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              GestureDetector(
-                onTap: _pickImage,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: _buildPreview(),
-                ),
+      body: SafeArea(
+        child: SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Complete los datos del producto',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Color(0xFF95B1EE)),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                  GestureDetector(
+                    onTap: _pickImage,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: const Color(0xFF757575),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(100),
+                          color: const Color(0xFF95B1EE),
+                        ),
+                        child: const Center(
+                          child: Icon(Icons.camera_alt,
+                              size: 40, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: _nameCtrl,
+                          decoration: InputDecoration(
+                            labelText: 'Nombre',
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            hintStyle:
+                                const TextStyle(color: Color(0xFF757575)),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 16),
+                            border: authOutlineInputBorder,
+                            enabledBorder: authOutlineInputBorder,
+                            focusedBorder: authOutlineInputBorder.copyWith(
+                                borderSide:
+                                    const BorderSide(color: Color(0xFF364c84))),
+                          ),
+                          validator: (v) =>
+                              v!.isEmpty ? 'Campo requerido' : null,
+                        ),
+                        const SizedBox(height: 24),
+                        TextFormField(
+                          controller: _priceCtrl,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Precio de compra',
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            hintStyle:
+                                const TextStyle(color: Color(0xFF757575)),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 16),
+                            border: authOutlineInputBorder,
+                            enabledBorder: authOutlineInputBorder,
+                            focusedBorder: authOutlineInputBorder.copyWith(
+                                borderSide:
+                                    const BorderSide(color: Color(0xFF364c84))),
+                          ),
+                          validator: (v) => double.tryParse(v!) == null
+                              ? 'Número inválido'
+                              : null,
+                        ),
+                        const SizedBox(height: 24),
+                        TextFormField(
+                          controller: _salePriceCtrl,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Precio de venta',
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            hintStyle:
+                                const TextStyle(color: Color(0xFF757575)),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 16),
+                            border: authOutlineInputBorder,
+                            enabledBorder: authOutlineInputBorder,
+                            focusedBorder: authOutlineInputBorder.copyWith(
+                                borderSide:
+                                    const BorderSide(color: Color(0xFF364c84))),
+                          ),
+                          validator: (v) => double.tryParse(v!) == null
+                              ? 'Número inválido'
+                              : null,
+                        ),
+                        const SizedBox(height: 24),
+                        TextFormField(
+                          controller: _qtyCtrl,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: 'Cantidad',
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            hintStyle:
+                                const TextStyle(color: Color(0xFF757575)),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 16),
+                            border: authOutlineInputBorder,
+                            enabledBorder: authOutlineInputBorder,
+                            focusedBorder: authOutlineInputBorder.copyWith(
+                                borderSide:
+                                    const BorderSide(color: Color(0xFF364c84))),
+                          ),
+                          validator: (v) => int.tryParse(v!) == null
+                              ? 'Entero inválido'
+                              : null,
+                        ),
+                        const SizedBox(height: 32),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _saveProduct();
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: const Color(0xFF364c84),
+                            foregroundColor: Colors.white,
+                            minimumSize: const Size(double.infinity, 48),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                            ),
+                          ),
+                          child: Text(isEditing ? 'Actualizar' : 'Guardar'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _nameCtrl,
-                decoration: const InputDecoration(labelText: 'Nombre'),
-                validator: (v) => v!.isEmpty ? 'Requerido' : null,
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                controller: _priceCtrl,
-                decoration:
-                    const InputDecoration(labelText: 'Precio de compra'),
-                keyboardType: TextInputType.number,
-                validator: (v) =>
-                    double.tryParse(v!) == null ? 'Número inválido' : null,
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                controller: _salePriceCtrl,
-                decoration: const InputDecoration(labelText: 'Precio de venta'),
-                keyboardType: TextInputType.number,
-                validator: (v) =>
-                    double.tryParse(v!) == null ? 'Número inválido' : null,
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                controller: _qtyCtrl,
-                decoration: const InputDecoration(labelText: 'Cantidad'),
-                keyboardType: TextInputType.number,
-                validator: (v) =>
-                    int.tryParse(v!) == null ? 'Entero inválido' : null,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _saveProduct();
-                  }
-                },
-                child: Text(isEditing ? 'Actualizar' : 'Guardar'),
-              ),
-            ],
+            ),
           ),
         ),
       ),
     );
-  }
-
-  Widget _buildPreview() {
-    if (_bytes != null) {
-      return Image.memory(_bytes!, height: 150, fit: BoxFit.cover);
-    } else if (_file != null) {
-      return Image.file(_file!, height: 150, fit: BoxFit.cover);
-    } else if (_initialImagePath != null) {
-      return kIsWeb
-          ? Image.network(_initialImagePath!, height: 150, fit: BoxFit.cover)
-          : Image.file(File(_initialImagePath!),
-              height: 150, fit: BoxFit.cover);
-    } else {
-      return Container(
-        height: 150,
-        decoration: BoxDecoration(
-          color: Colors.lime[100],
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: const Center(child: Icon(Icons.camera_alt, size: 40)),
-      );
-    }
   }
 }
