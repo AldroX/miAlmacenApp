@@ -7,6 +7,7 @@ import 'services/product_service.dart';
 import 'pages/dashboard.dart';
 import 'pages/products_page.dart';
 import 'widgets/test.dart';
+import 'core/theme/palette_colors.dart';
 
 const Color kActiveColor = Color.fromRGBO(44, 98, 255, 1.0);
 const Color kInactiveColor = Color(0xFF95B1EE);
@@ -27,8 +28,8 @@ const String listIcon = '''
   <path d="M13 19h5" />
   <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
   <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
-</svg>
-''';
+  </svg>
+  ''';
 
 const String settingsIcon = '''
     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-settings-check">
@@ -44,6 +45,7 @@ void main() async {
   try {
     await Hive.initFlutter();
     Hive.registerAdapter(ProductAdapter());
+
     try {
       await Hive.openBox<Product>(ProductService.boxName);
     } catch (_) {
@@ -68,9 +70,9 @@ class MyAlmacenApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: kActiveColor),
-        scaffoldBackgroundColor: const Color(0xFFF5F7FA),
+        scaffoldBackgroundColor: AppColors.azulMarino,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0x00121212),
+          backgroundColor: Colors.transparent,
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.black87),
           titleTextStyle: TextStyle(
@@ -102,7 +104,6 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int selectedIndex = 0;
-
   final List<Widget> pages = const [
     DashboardPage(),
     ProductsPage(),
@@ -124,7 +125,19 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[selectedIndex],
+      appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: const Text(
+            'MiAlmacen',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          )),
+      body: IndexedStack(
+        index: selectedIndex,
+        children: pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         onTap: _onItemTapped,
