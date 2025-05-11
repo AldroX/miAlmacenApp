@@ -34,55 +34,127 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Productos')),
-      body: ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (_, i) {
-          final p = products[i];
-          return Card(
-            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: ListTile(
-              leading: p.imagePath != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.file(File(p.imagePath!),
-                          width: 56, height: 56, fit: BoxFit.cover))
-                  : null,
-              title: Text(p.name),
-              subtitle: Text('Stock: ${p.quantity}'),
-              trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () async {
-                      await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => ProductFormPage(product: p)));
-                      _load();
-                    }),
-                IconButton(
-                    icon: const Icon(Icons.add),
-                    onPressed: () async {
-                      await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => UpdateStockPage(product: p)));
-                      _load();
-                    }),
-                IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () => _delete(p.id)),
-              ]),
-            ),
-          );
-        },
+      appBar: AppBar(
+        title: const Text('Productos'),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: products.isEmpty
+            ? const Center(child: Text('No hay productos'))
+            : ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, i) {
+                  final p = products[i];
+                  return Card(
+                    color: const Color(0xffdce2f4),
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Row(
+                        children: [
+                          // Image Thumbnail
+                          Container(
+                            width: 64,
+                            height: 64,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF5F6F9),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            clipBehavior: Clip.hardEdge,
+                            child: p.imagePath != null
+                                ? Image.file(
+                                    File(p.imagePath!),
+                                    fit: BoxFit.cover,
+                                  )
+                                : const Icon(Icons.image_not_supported),
+                          ),
+                          const SizedBox(width: 16),
+                          // Info and actions
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  p.name,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Stock: ${p.quantity}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Action buttons
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.edit),
+                                color: const Color.fromRGBO(44, 98, 255, 1.0),
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          ProductFormPage(product: p),
+                                    ),
+                                  );
+                                  _load();
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                color: const Color.fromRGBO(44, 98, 255, 1.0),
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          UpdateStockPage(product: p),
+                                    ),
+                                  );
+                                  _load();
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.delete_outline),
+                                color: const Color(0xFFF9425E),
+                                onPressed: () => _delete(p.id),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const ProductFormPage()));
+          await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const ProductFormPage()),
+          );
           _load();
         },
+        backgroundColor: const Color.fromRGBO(44, 98, 255, 1.0),
         child: const Icon(Icons.add),
       ),
     );
