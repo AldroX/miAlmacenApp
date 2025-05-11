@@ -4,6 +4,7 @@ import '../widgets/product_list.dart';
 import '../widgets/pie_chart.dart';
 import '../services/product_service.dart';
 import '../models/product.dart';
+import '../core/theme/palette_colors.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -67,7 +68,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFDF5),
+      backgroundColor: AppColors.azulClaro,
       appBar: AppBar(
         backgroundColor: const Color(0xFF364c84),
         title: const Text(
@@ -112,6 +113,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 value: '\$${totalInvested.toStringAsFixed(2)}',
                                 icon: Icons.trending_up,
                                 color: Colors.blue,
+                                background: AppColors.azulMarinoClaro,
                               ),
                               const SizedBox(width: 16),
                               MetricsCard(
@@ -119,25 +121,47 @@ class _DashboardPageState extends State<DashboardPage> {
                                 value: '\$${totalProfit.toStringAsFixed(2)}',
                                 icon: Icons.attach_money,
                                 color: Colors.green,
+                                background: AppColors.verdeCute,
                               ),
                             ],
                           ),
-                          const SizedBox(height: 30),
-                          const Text(
-                            'Distribución por Producto',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
                           const SizedBox(height: 16),
-                          PieChartWidget(
-                            dataMap: Map.fromEntries(
-                              soldByProduct.entries.map(
-                                  (e) => MapEntry(e.key, e.value.toDouble())),
+                          Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              side: const BorderSide(
+                                  color: AppColors.customLightBlue),
                             ),
-                            chartRadius:
-                                MediaQuery.of(context).size.width / 2.5,
+                            elevation: 8,
+                            shadowColor: AppColors.azulMarino.withOpacity(0.2),
+                            child: Padding(
+                              padding: const EdgeInsets.all(26.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'Distribución por Producto',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.azulMarino,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  PieChartWidget(
+                                    dataMap: Map.fromEntries(
+                                      soldByProduct.entries.map(
+                                        (e) =>
+                                            MapEntry(e.key, e.value.toDouble()),
+                                      ),
+                                    ),
+                                    chartRadius:
+                                        MediaQuery.of(context).size.width / 2.5,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 24),
                           const Text(
@@ -145,6 +169,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
+                              color: AppColors.azulMarino,
                             ),
                           ),
                           const SizedBox(height: 8),
