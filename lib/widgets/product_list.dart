@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mialmacen/core/theme/palette_colors.dart';
 import '/services/product_service.dart';
 
 class ProductList extends StatefulWidget {
@@ -63,8 +64,6 @@ class _ProductListState extends State<ProductList> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -73,26 +72,30 @@ class _ProductListState extends State<ProductList> {
         final entry = widget.soldByProduct.entries.elementAt(i);
         final prodName = entry.key;
         final String? productId = widget.nameToId[prodName];
-        print('Buscando ID para "$prodName": ${widget.nameToId[prodName]}');
+        // print('Buscando ID para "$prodName": ${widget.nameToId[prodName]}');
         return Card(
+          color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
           child: ListTile(
-            leading: Icon(Icons.inventory_2, color: colorScheme.secondary),
+            leading:
+                const Icon(Icons.inventory_2, color: AppColors.azulMarinoClaro),
             title: Text(prodName),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text('${entry.value}',
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.azulMarinoClaro)),
                 const SizedBox(width: 8),
                 IconButton(
                   icon: const Icon(Icons.visibility),
                   onPressed: (productId != null && productId.isNotEmpty)
                       ? () => _viewProduct(productId)
                       : null,
-                  color: colorScheme.secondary,
+                  color: AppColors.azulMarinoClaro,
                 ),
               ],
             ),
