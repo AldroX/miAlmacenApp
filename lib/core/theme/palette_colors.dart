@@ -11,6 +11,8 @@ class AppColors {
   static const Color azulClaro = Color(0xFFA8DADC); // Fondo
   static const Color grisOscuro = Color(0xFF343A40); // Texto
   static const Color verdeLima = Color(0xFFA8E6CF); // Accent
+  static const Color verdeCute = Color(0xFF154966);
+  static const Color customLightBlue = Color(0xFFD8F1F2);
 
   // Variaciones de colores
   static const Color azulMarinoClaro = Color(0xFF2B4B6F);
