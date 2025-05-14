@@ -9,8 +9,8 @@ import 'pages/products_page.dart';
 import 'widgets/test.dart';
 import 'core/theme/palette_colors.dart';
 
-const Color kActiveColor = Color.fromRGBO(44, 98, 255, 1.0);
-const Color kInactiveColor = Color(0xFF95B1EE);
+const Color kActiveColor = AppColors.azulMarinoOscuro;
+const Color kInactiveColor = AppColors.azulMarinoClaro;
 
 const String homeIcon = '''
     <svg width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-home">
