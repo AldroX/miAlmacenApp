@@ -67,29 +67,6 @@ class MyAlmacenApp extends StatelessWidget {
     return MaterialApp(
       title: 'MiAlmacén',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: kActiveColor),
-        scaffoldBackgroundColor: AppColors.azulMarino,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black87),
-          titleTextStyle: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
-        ),
-        cardTheme: CardTheme(
-          color: const Color(0xffdce2f4),
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        ),
-      ),
       home: const RootPage(),
     );
   }
@@ -126,7 +103,7 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.azulMarinoOscuro,
           elevation: 0,
           centerTitle: true,
           title: const Text(
