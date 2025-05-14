@@ -68,20 +68,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.azulClaro,
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF364c84),
-        title: const Text(
-          'Dashboard',
-          style: TextStyle(color: Color(0xFFFFFDF5)),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadData,
-          ),
-        ],
-      ),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: isLoading
             ? const Center(child: CircularProgressIndicator())
@@ -142,9 +129,10 @@ class _DashboardPageState extends State<DashboardPage> {
                                 children: [
                                   const Text(
                                     'Distribución por Producto',
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 20,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.bold,
                                       color: AppColors.azulMarino,
                                     ),
                                   ),
