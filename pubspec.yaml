@@ -23,6 +23,7 @@ dependencies:
   lints: ^4.0.0
   pie_chart: ^5.1.0
   syncfusion_flutter_charts: ^23.1.38
+  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_test:
