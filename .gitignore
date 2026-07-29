@@ -1,0 +1,30 @@
+# Flutter
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+*.iml
+.idea/
+.metadata
+
+# Android
+android/.gradle/
+android/local.properties
+android/key.properties
+
+# iOS
+ios/Flutter/ephemeral/
+ios/Pods/
+ios/.symlinks/
+
+# Web
+web/.dart_tool/
+
+# OpenCode / Skills
+.atl/
+
+# Misc
+.DS_Store
+*.swp
+*.swo
