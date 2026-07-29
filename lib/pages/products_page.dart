@@ -92,7 +92,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                 const SizedBox(height: 4),
                                 Text(
                                   'Stock: ${p.quantity}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.black54,
                                   ),

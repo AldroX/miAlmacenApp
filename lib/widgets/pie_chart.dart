@@ -6,10 +6,10 @@ class PieChartWidget extends StatelessWidget {
   final double chartRadius;
 
   const PieChartWidget({
-    Key? key,
+    super.key,
     required this.dataMap,
     required this.chartRadius,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,6 @@ import 'models/product_adapter.dart';
 import 'services/product_service.dart';
 import 'pages/dashboard.dart';
 import 'pages/products_page.dart';
-import 'widgets/test.dart';
 import 'core/theme/palette_colors.dart';
 
 const Color kActiveColor = Color.fromRGBO(44, 98, 255, 1.0);
@@ -81,7 +80,7 @@ class MyAlmacenApp extends StatelessWidget {
             color: Colors.black87,
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: const Color(0xffdce2f4),
           elevation: 4,
           shape: RoundedRectangleBorder(
@@ -158,6 +157,19 @@ class _RootPageState extends State<RootPage> {
                   label: '',
                 ))
             .toList(),
+      ),
+    );
+  }
+}
+
+class ComplateProfileScreen extends StatelessWidget {
+  const ComplateProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text('Configuración'),
       ),
     );
   }

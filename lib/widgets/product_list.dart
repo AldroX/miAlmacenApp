@@ -7,13 +7,13 @@ class ProductList extends StatefulWidget {
   final Map<String, String> nameToId;
 
   const ProductList({
-    Key? key,
+    super.key,
     required this.soldByProduct,
     required this.nameToId,
-  }) : super(key: key);
+  });
 
   @override
-  _ProductListState createState() => _ProductListState();
+  State<ProductList> createState() => _ProductListState();
 }
 
 class _ProductListState extends State<ProductList> {

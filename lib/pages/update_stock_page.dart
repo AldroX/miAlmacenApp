@@ -15,6 +15,7 @@ class _UpdateStockPageState extends State<UpdateStockPage> {
 
   Future _update(int change) async {
     await ProductService.updateStock(widget.product.id, change);
+    if (!mounted) return;
     Navigator.pop(context);
   }
 
@@ -23,7 +24,7 @@ class _UpdateStockPageState extends State<UpdateStockPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Actualizar Stock'),
-        backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
         foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
         elevation: 0,
         scrolledUnderElevation: 2,
@@ -44,14 +45,14 @@ class _UpdateStockPageState extends State<UpdateStockPage> {
               decoration: InputDecoration(
                 labelText: 'Cantidad',
                 filled: true,
-                fillColor: Theme.of(context).colorScheme.surfaceVariant,
+                fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.transparent),
+                  borderSide: const BorderSide(color: Colors.transparent),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.transparent),
+                  borderSide: const BorderSide(color: Colors.transparent),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),

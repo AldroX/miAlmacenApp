@@ -14,7 +14,7 @@ const authOutlineInputBorder = OutlineInputBorder(
 class ProductFormPage extends StatefulWidget {
   final Product? product; // si es nulo -> crear; si no -> editar
 
-  const ProductFormPage({Key? key, this.product}) : super(key: key);
+  const ProductFormPage({super.key, this.product});
 
   @override
   State<ProductFormPage> createState() => _ProductFormPageState();
@@ -28,7 +28,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
   final _qtyCtrl = TextEditingController();
 
   File? _file;
-  Uint8List? _bytes;
   String? _base64;
   String? _initialImagePath; // ruta o URL inicial
   final _picker = ImagePicker();
@@ -63,7 +62,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
       if (kIsWeb) {
         final b = await picked.readAsBytes();
         setState(() {
-          _bytes = b;
           _base64 = 'data:image/png;base64,${base64Encode(b)}';
           _initialImagePath = null;
         });
@@ -104,6 +102,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
         imagePath,
       );
     }
+    if (!mounted) return;
     Navigator.pop(context, true);
   }
 

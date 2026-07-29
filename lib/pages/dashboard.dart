@@ -133,7 +133,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   color: AppColors.customLightBlue),
                             ),
                             elevation: 8,
-                            shadowColor: AppColors.azulMarino.withOpacity(0.2),
+                            shadowColor: AppColors.azulMarino.withValues(alpha: 0.2),
                             child: Padding(
                               padding: const EdgeInsets.all(26.0),
                               child: Column(

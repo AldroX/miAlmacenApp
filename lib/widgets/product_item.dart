@@ -8,7 +8,8 @@ class ProductItem extends StatelessWidget {
   final VoidCallback onEdit;
   final Function(String, int) onStockChange;
 
-  ProductItem({
+  const ProductItem({
+    super.key,
     required this.product,
     required this.onEdit,
     required this.onStockChange,
